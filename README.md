@@ -1,47 +1,71 @@
-# Clinic Management System Database
+# Clinic Booking & Patient Management System
 
-## Overview
-A comprehensive MySQL database system designed for managing clinic operations including patient appointments, medical records, billing, and staff management.
+## Assignment: Week 8 Final Project
+**Question 1: Build a Complete Database Management System**
+
+---
+
+## Objective
+Design and implement a full-featured relational database using **MySQL**.
+
+---
+
+## Use Case
+A **Clinic Booking & Patient Management System** that manages:
+
+- Patients
+- Doctors & Specialties
+- Appointments
+- Medical Records
+- Medications & Prescriptions
+- Treatments
+- Invoices & Payments
+- Insurance Providers
+- Audit Logs
+
+---
 
 ## Database Schema
+The schema includes **well-structured tables** with:
 
-### Core Tables
-- **Patients** - Stores patient demographics and contact information
-- **Doctors** - Manages doctor profiles, licenses, and specialties
-- **Appointments** - Handles scheduling with conflict prevention
-- **Medical Records** - Tracks patient visits, diagnoses, and treatments
-- **Invoices** - Manages billing and payments
+- **Primary Keys** for unique identification  
+- **Foreign Keys** to enforce relationships  
+- **NOT NULL** and **UNIQUE** constraints where appropriate  
+- **ENUMs** and **CHECK constraints** for valid data  
 
 ### Relationships
-- **One-to-Many**: Patients → Appointments, Doctors → Appointments
-- **Many-to-Many**: Doctors ↔ Specialties (via doctor_specialty table)
-- **One-to-One**: Appointments ↔ Invoices
+- **One-to-One**: `users` ↔ `doctors`  
+- **One-to-Many**: `doctors` → `appointments`, `patients` → `appointments`  
+- **Many-to-Many**: `doctors` ↔ `specialties` via `doctor_specialty`  
+- **Many-to-Many**: `appointments` ↔ `treatments` via `appointment_treatments`
 
-### Constraints Implemented
-- Primary Keys on all main tables
-- Foreign Keys for relationship integrity
-- Unique constraints (username, email, license numbers)
-- ENUM types for status fields and categories
-- NOT NULL constraints on required fields
+---
 
-## Advanced Features
+## Features
+- Triggers to prevent overlapping appointments
+- Automatic invoice updates when treatments are added
+- Views for patient appointments, doctor schedules, and billing
+- Stored procedures to cancel appointments and check doctor availability
+- Indexes for performance optimization
 
-### Triggers
-1. **prevent_doctor_overlap** - Ensures doctors don't have overlapping appointments
-2. **prevent_room_overlap** - Prevents double-booking of rooms
-3. **update_invoice_total** - Automatically calculates invoice totals when treatments are added
+---
 
-### Views
-1. **vw_patient_upcoming_appointments** - Shows upcoming appointments for patients
-2. **vw_doctor_schedule** - Displays doctor schedules
-3. **vw_patient_billing** - Provides billing information for patients
+## Deliverables
+A single **`.sql` file**:  
+- `CREATE DATABASE` statement  
+- `CREATE TABLE` statements  
+- Relationship constraints  
+- Sample test data  
 
-### Stored Procedures
-1. **sp_cancel_appointment** - Handles appointment cancellation with validation
-2. **sp_get_doctor_availability** - Checks doctor availability for a specific date
+---
 
-## Installation
+## How to Use
+1. Open **MySQL Workbench** or any MySQL client.  
+2. Execute the `.sql` file to create the database, tables, and sample data.  
+3. Run queries on views and tables to test relationships, triggers, and stored procedures.  
 
-1. Execute the SQL file in MySQL:
-```bash
-mysql -u your_username -p < clinic_management_full_with_triggers.sql
+---
+
+## Author
+- **Ziyin Worku**  
+- Submission for **Week 8 Database Management Assignment**
